@@ -71,7 +71,6 @@ void DrawShapes::Paint(RECT rect)
 	GAME_ENGINE->DrawLine(50,180,80,130);
 	GAME_ENGINE->DrawLine(80,130,110,180);
 	GAME_ENGINE->DrawRect(50,180, 60,60);
-
 	//part 4
 	GAME_ENGINE->DrawString("4.", 20, 300);
 	GAME_ENGINE->SetColor(RGB(0,0,0));
