@@ -39,7 +39,7 @@ int main()
     double distance{};
     std:: cout << "Distance in km? -> ";
     std:: cin >> distance;
-    std:: cout << distance * 1000 << " meters. " << distance * 100000 <<  " cm";
+    std:: cout << distance * 1000 << " meters. " << distance * 100000 <<  " cm" << std::endl;
     
     //-------------------------------------------------------------------------
     
@@ -48,14 +48,14 @@ int main()
 
     std::cout << "Angles in degrees? -> ";
     std::cin >> angle;
-    std::cout << angle * pi / 180.00 << " radians.";
+    std::cout << angle * pi / 180.00 << " radians." << std::endl;
     
     //-------------------------------------------------------------------------
     
     int secondsOfOneRotation{};
-    std::cout << "Seconds of one rotations? -> ";
     std::cin >> secondsOfOneRotation;
-    std::cout << 360 / secondsOfOneRotation << " degrees/second";
+    std::cout << "Seconds of one rotations? -> ";
+    std::cout << 360 / secondsOfOneRotation << " degrees/second" << std:: endl;
     
     //-------------------------------------------------------------------------
     
@@ -66,7 +66,7 @@ int main()
     std::cin >> speed;
     std::cout << "Elapsed time (minutes)? -> ";
     std::cin >> elapsedTime;
-    std::cout << (speed / 60 * elapsedTime) * 1'000 << " meters";
+    std::cout << (speed / 60 * elapsedTime) * 1'000 << " meters" << std::endl;
     
     //-------------------------------------------------------------------------
     
@@ -75,7 +75,7 @@ int main()
     
     std::cout << "Seconds? -> ";
     std::cin >> seconds;
-    std::cout << "Velocity " << seconds * gravity << " m/sec.";
+    std::cout << "Velocity " << seconds * gravity << " m/sec." << std::endl;
     
     //-------------------------------------------------------------------------
     
@@ -84,15 +84,15 @@ int main()
     std::cout << "Radius of circle? -> ";
     std::cin >> radius;
     std::cout << "Circumference: " << 2.00 * pi * radius << std::endl;
-    std::cout << "Area: " << pi * radius * radius;
+    std::cout << "Area: " << pi * radius * radius << std::endl;
     
     //-------------------------------------------------------------------------
     int width{}, height{};
     
     std::cout << "Width and height? -> ";
     std::cin >> width >> height;
-    //std::cout << "Circumference: " << ;
-    //std::cout << "Area: " << ;
+    std::cout << "Circumference: " << 2 * ( height + width) << std::endl;
+    std::cout << "Area: " << std::endl;
 
 
     //system("PAUSE");

@@ -38,7 +38,7 @@ void Bitmaps::Initialize(HINSTANCE hInstance)
 	// Set the optional values
 	GAME_ENGINE->SetWidth(m_BmpBackgroundPrt->GetWidth());
 	GAME_ENGINE->SetHeight(m_BmpBackgroundPrt->GetHeight());
-    GAME_ENGINE->SetFrameRate(1);
+    GAME_ENGINE->SetFrameRate(10);
 
 	// Set the keys that the game needs to listen to
 	//tstringstream buffer;
