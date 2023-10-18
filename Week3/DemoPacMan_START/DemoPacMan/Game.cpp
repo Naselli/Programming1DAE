@@ -47,12 +47,27 @@ void End()
 #pragma region inputHandling											
 void OnKeyDownEvent(SDL_Keycode key)
 {
-
+	
 }
 
 void OnKeyUpEvent(SDL_Keycode key)
 {
-	
+	switch ( key )
+	{
+		case SDLK_LEFT:
+			g_pacmanDir = Direction::left;
+			break;
+		case SDLK_RIGHT:
+			g_pacmanDir = Direction::right;
+		break;
+		case SDLK_UP:
+			g_pacmanDir = Direction::up;
+		break;
+		case SDLK_DOWN:
+			g_pacmanDir = Direction::down;
+		break;
+		default: break;
+	}
 }
 
 void OnMouseMotionEvent(const SDL_MouseMotionEvent& e)
@@ -108,7 +123,25 @@ void DrawPacman()
 	const float mouthSize{ pi / 2.5f }; // angle size of mouth opening
 	const float pacmanSize{ 2 * pi - mouthSize };
 
-	const float directionAngle{ 0.f }; // looks towards the right
+	float directionAngle{ 0.f }; // looks towards the right
+
+	switch ( g_pacmanDir )
+	{
+		case Direction::neutral:case Direction::right:
+			directionAngle = 0.f;
+			break;
+		case Direction::up:
+			directionAngle = pi / 2;
+			break;
+		case Direction::down:
+			directionAngle = -pi / 2;
+			break;
+		case Direction::left:
+			directionAngle = pi;
+			break;
+		
+	}
+	
 	const float startAngle{ mouthSize / 2 + directionAngle };
 
 	SetColor(1.f, 0.87f, 0.f);
@@ -119,6 +152,14 @@ void UpdatePacman()
 {
 	const float speed{ 2 };
 
+	switch ( g_pacmanDir )
+	{
+		case Direction::up: g_PacmanPos.y -= speed; break;
+		case Direction::down: g_PacmanPos.y += speed; break;
+		case Direction::left: g_PacmanPos.x -= speed; break;
+		case Direction::right: g_PacmanPos.x += speed; break;
+		default: ;
+	}
 }
 
 

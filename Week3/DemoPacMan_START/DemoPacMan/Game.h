@@ -16,11 +16,14 @@ float g_WindowHeight{ 600 };
 #pragma region ownDeclarations
 enum class Direction
 {
+    neutral,
     up,
     down,
     left,
     right
 };
+
+Direction g_pacmanDir{ Direction::neutral };
 
 // Declare your own global variables here
 const float g_PacmanRadius{ 13.f };
