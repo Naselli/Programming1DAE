@@ -72,7 +72,7 @@ private:
     // -------------------------
     // Datamembers
     // -------------------------
-    Bitmap* m_BmpPlatformPtr{ };
+    //Bitmap* m_BmpPlatformPtr{ };
 
     //Linear movement
     double m_LinearMovement_Y_Deviation{};

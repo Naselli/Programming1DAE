@@ -48,22 +48,22 @@ void MovementDemo::Initialize(HINSTANCE hInstance)
 void MovementDemo::Start()
 {
 	// Insert the code that needs to be executed at the start of the game
-	const std::string fileName{"Graphics/platform.bmp"};
-	m_BmpPlatformPtr = new  Bitmap(fileName);
-
-	if (m_BmpPlatformPtr->Exists()==false)
-	{
-		GAME_ENGINE->MessageBox(std::string("File not found") + fileName);
-		GAME_ENGINE->Quit();
-	}
-	else m_BmpPlatformPtr->SetTransparencyColor(RGB(255,0,255));
+	//const std::string fileName{"Graphics/platform.bmp"};
+	//m_BmpPlatformPtr = new  Bitmap(fileName);
+	//
+	//if (m_BmpPlatformPtr->Exists()==false)
+	//{
+	//	GAME_ENGINE->MessageBox(std::string("File not found") + fileName);
+	//	GAME_ENGINE->Quit();
+	//}
+	//else m_BmpPlatformPtr->SetTransparencyColor(RGB(255,0,255));
 	
 }
 
 void MovementDemo::End()
 {
 	// Insert the code that needs to be executed at the closing of the game
-	delete m_BmpPlatformPtr;
+	//delete m_BmpPlatformPtr;
 }
 
 void MovementDemo::Paint(RECT rect)
