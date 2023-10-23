@@ -7,6 +7,8 @@
 // Include Files
 //-----------------------------------------------------------------
 #include "LissajousDemo.h"
+#define _USE_MATH_DEFINES
+#include <math.h>
 
 //-----------------------------------------------------------------
 // LissajousDemo methods																				
@@ -56,34 +58,44 @@ void LissajousDemo::End()
 
 void LissajousDemo::Paint(RECT rect)
 {
-	// Insert paint code
 	GAME_ENGINE->SetColor(RGB(255,10,10,));
-	GAME_ENGINE->FillOval(m_CenterX  - RADIUS, m_CenterY - RADIUS, 
-							2 * RADIUS, 2 * RADIUS);
+
+	double verticalDeviation{};
+	if (m_AnimationMode == AnimationMode::Both || m_AnimationMode == AnimationMode::Vertical)
+	{
+		double verticalWaveProgressInPercent{ m_TickCounter / (FRAMERATE * VERTICAL_PERIOD_IN_SECONDS) };
+		verticalDeviation = VERTICAL_AMPLITUDE * sin((2 * M_PI) * verticalWaveProgressInPercent);
+	}
+
+	double horizontalDeviation{};
+	if (m_AnimationMode == AnimationMode::Both || m_AnimationMode == AnimationMode::Horizontal)
+	{
+		double horizontalWaveProgressInPercent{ m_TickCounter / (FRAMERATE * HORIZONTAL_PERIOD_IN_SECONDS) };
+		horizontalDeviation = HORIZONTAL_AMPLITUDE * sin((2 * M_PI) * horizontalWaveProgressInPercent);
+	}
+	
+	GAME_ENGINE->FillOval((int)(m_CenterX  - RADIUS - horizontalDeviation), (int)(m_CenterY - RADIUS + verticalDeviation), 2 * RADIUS, 2 * RADIUS);
 
 }
 
 void LissajousDemo::Tick()
 {
+	++m_TickCounter;
 	// Insert non-paint code that needs to be executed each tick 
 }
 
 void LissajousDemo::MouseButtonAction(bool isLeft, bool isDown, int x, int y, WPARAM wParam)
-{	
-	// Insert the code that needs to be executed when the game registers a mouse button action
-
-	/* Example:
-	if (isLeft == true && isDown == true) // is it a left mouse click?
-	{	
-		if ( x > 261 && x < 261 + 117 ) // check if click lies within x coordinates of choice
+{
+	if (isLeft == false && isDown == false)
+	{
+		switch (m_AnimationMode)
 		{
-			if ( y > 182 && y < 182 + 33 ) // check if click also lies within y coordinates of choice
-			{
-				GAME_ENGINE->MessageBox("Clicked.");
-			}
+		case AnimationMode::None: m_AnimationMode = AnimationMode::Vertical; break;
+		case AnimationMode::Vertical: m_AnimationMode = AnimationMode::Horizontal; break;
+		case AnimationMode::Horizontal: m_AnimationMode = AnimationMode::Both; break;
+		case AnimationMode::Both: m_AnimationMode = AnimationMode::None; break;
 		}
 	}
-	*/
 }
 
 
