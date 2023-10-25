@@ -1,6 +1,6 @@
 //-----------------------------------------------------------------
 // Main Game  File
-// C++ Header - GrowingBars.h - version v7_02_firstyear			
+// C++ Header - Explosion.h - version v7_02_firstyear			
 //-----------------------------------------------------------------
 
 #pragma once
@@ -14,25 +14,25 @@
 #include "AbstractGame.h"
 
 //-----------------------------------------------------------------
-// GrowingBars Class																
+// Explosion Class																
 //-----------------------------------------------------------------
-class GrowingBars : public AbstractGame, public Callable
+class Explosion : public AbstractGame, public Callable
 {
 public:				
 	//---------------------------
 	// Constructor(s) and Destructor
 	//---------------------------
-	GrowingBars();
+	Explosion();
 
-	virtual ~GrowingBars() override;
+	virtual ~Explosion() override;
 
 	//---------------------------
 	// Disabling copy/move constructors and assignment operators   
 	//---------------------------
-	GrowingBars(const GrowingBars& other) = delete;
-	GrowingBars(GrowingBars&& other) noexcept = delete;
-	GrowingBars& operator=(const GrowingBars& other) = delete;
-	GrowingBars& operator=(GrowingBars&& other) noexcept = delete;
+	Explosion(const Explosion& other) = delete;
+	Explosion(Explosion&& other) noexcept = delete;
+	Explosion& operator=(const Explosion& other) = delete;
+	Explosion& operator=(Explosion&& other) noexcept = delete;
 
 	//---------------------------
 	// General Methods
@@ -52,24 +52,13 @@ public:
 
 private:
 
-	const int BAR_POSX					{ 50 };
-	const int BAR_POSY					{ 50 };
+	const int SQUARE_SIZE { 50 };
+	const int SCREENWIDTH { 800 };
+	const int SCREENHEIGTH { 500 };
+	const int FRAMERATE { 50 };
 
-	const int BAR_WIDTH					{ 600 };
-	const int BAR_HEIGTH				{ 100 };
+	POINT CENTER_POINT { (SCREENWIDTH / 2), (SCREENHEIGTH / 2)};
 
-	//first bar
-	int FIRSTBAR_SPEED_IN_PIXELS		{ 2 }; //not const because the value changes
-	int m_FirstBarWidth{};
-
-	//second bar
-	int SECONDBAR_SPEED_IN_PIXELS		{ 5 }; //not const because the value changes
-	int m_SecondBarWidth{};
-
-	//third bar
-	int m_ThirdBarWidth{};
-	const int INTERVAL { 50 };
-	int m_ticks { 0 };
-	COLORREF g_color { RGB(255,255,255) };
+	
 
 };

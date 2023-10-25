@@ -78,14 +78,14 @@ private:
 	AnimationMode m_AnimationMode{ AnimationMode::None };
 
 	//vertical movement
-	const int    VERTICAL_AMPLITUDE			{100};
-	const double VERTICAL_PERIOD_IN_SECONDS {  3};
+	const int    VERTICAL_AMPLITUDE			{ 300 };
+	const double VERTICAL_PERIOD_IN_SECONDS { 1 };
 	const double VERTICAL_PHASE_IN_PERCENT	{};
 
 	//horizontal movement
-	const int	 HORIZONTAL_AMPLITUDE		  { 100 };
-	const double HORIZONTAL_PERIOD_IN_SECONDS { 3 };
-	const double HORIZONTAL_PHASE_IN_PERCENT  {};
+	const int	 HORIZONTAL_AMPLITUDE		  { VERTICAL_AMPLITUDE };
+	const double HORIZONTAL_PERIOD_IN_SECONDS { VERTICAL_PERIOD_IN_SECONDS };
+	const double HORIZONTAL_PHASE_IN_PERCENT  { 0.25 };
 
 	int m_TickCounter{};
 };

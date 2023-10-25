@@ -1,6 +1,6 @@
 //-----------------------------------------------------------------
 // Main Game  File
-// C++ Header - GrowingBars.h - version v7_02_firstyear			
+// C++ Header - ClockMovementDemo.h - version v7_02_firstyear			
 //-----------------------------------------------------------------
 
 #pragma once
@@ -13,26 +13,33 @@
 #include "GameEngine.h"
 #include "AbstractGame.h"
 
+
 //-----------------------------------------------------------------
-// GrowingBars Class																
+//
 //-----------------------------------------------------------------
-class GrowingBars : public AbstractGame, public Callable
+
+
+
+//-----------------------------------------------------------------
+// ClockMovementDemo Class																
+//-----------------------------------------------------------------
+class ClockMovementDemo : public AbstractGame, public Callable
 {
 public:				
 	//---------------------------
 	// Constructor(s) and Destructor
 	//---------------------------
-	GrowingBars();
+	ClockMovementDemo();
 
-	virtual ~GrowingBars() override;
+	virtual ~ClockMovementDemo() override;
 
 	//---------------------------
 	// Disabling copy/move constructors and assignment operators   
 	//---------------------------
-	GrowingBars(const GrowingBars& other) = delete;
-	GrowingBars(GrowingBars&& other) noexcept = delete;
-	GrowingBars& operator=(const GrowingBars& other) = delete;
-	GrowingBars& operator=(GrowingBars&& other) noexcept = delete;
+	ClockMovementDemo(const ClockMovementDemo& other) = delete;
+	ClockMovementDemo(ClockMovementDemo&& other) noexcept = delete;
+	ClockMovementDemo& operator=(const ClockMovementDemo& other) = delete;
+	ClockMovementDemo& operator=(ClockMovementDemo&& other) noexcept = delete;
 
 	//---------------------------
 	// General Methods
@@ -51,25 +58,24 @@ public:
 	void CallAction(Caller* callerPtr) override;
 
 private:
+	// -------------------------
+	// Constants
+	// -------------------------
+	const int WINDOWWIDTH{ 800 };
+	const int WINDOWHEIGTH{ 800 };
+	const int FRAMERATE{ 50 };
 
-	const int BAR_POSX					{ 50 };
-	const int BAR_POSY					{ 50 };
+	const int RADIUS{ 300 };
 
-	const int BAR_WIDTH					{ 600 };
-	const int BAR_HEIGTH				{ 100 };
+	// -------------------------
+	// Datamembers
+	// -------------------------
+	POINT m_CenterPoint	{};
 
-	//first bar
-	int FIRSTBAR_SPEED_IN_PIXELS		{ 2 }; //not const because the value changes
-	int m_FirstBarWidth{};
+	int m_Angle			{ 90 };
+	int m_DeltaAngle	{};//90 degrees 
 
-	//second bar
-	int SECONDBAR_SPEED_IN_PIXELS		{ 5 }; //not const because the value changes
-	int m_SecondBarWidth{};
-
-	//third bar
-	int m_ThirdBarWidth{};
-	const int INTERVAL { 50 };
-	int m_ticks { 0 };
-	COLORREF g_color { RGB(255,255,255) };
+	Button* m_BtnLeftPtr{};
+	Button* m_BtnRightPtr{};
 
 };

@@ -47,7 +47,7 @@ void GrowingBars::Initialize(HINSTANCE hInstance)
 
 void GrowingBars::Start()
 {
-	// Insert the code that needs to be executed at the start of the game
+
 }
 
 void GrowingBars::End()
@@ -66,9 +66,15 @@ void GrowingBars::Paint(RECT rect)
 	GAME_ENGINE->SetColor(RGB(255,0,0));
 	GAME_ENGINE->FillRect(BAR_POSX, BAR_POSY + 200, m_SecondBarWidth, BAR_HEIGTH);
 
+	//third bar
+	GAME_ENGINE->SetColor(g_color);
+	GAME_ENGINE->FillRect(BAR_POSX, BAR_POSY + 400, m_ThirdBarWidth, BAR_HEIGTH);
+
 	GAME_ENGINE->SetColor(RGB(255,255,255));
 	GAME_ENGINE->DrawRect(BAR_POSX, BAR_POSY,BAR_WIDTH, BAR_HEIGTH);
 	GAME_ENGINE->DrawRect(BAR_POSX, BAR_POSY + 200, BAR_WIDTH, BAR_HEIGTH);
+	GAME_ENGINE->DrawRect(BAR_POSX, BAR_POSY + 400, BAR_WIDTH, BAR_HEIGTH);
+
 	
 }
 
@@ -86,6 +92,18 @@ void GrowingBars::Tick()
 	if (m_FirstBarWidth >= BAR_WIDTH) m_FirstBarWidth = 0;
 	if (m_SecondBarWidth >= BAR_WIDTH) m_SecondBarWidth = 0;
 	*/
+	++m_ticks;
+	if (m_ticks >= INTERVAL)
+	{
+		m_ThirdBarWidth += BAR_WIDTH / 8;
+
+		if (m_ThirdBarWidth > BAR_WIDTH)
+		{
+			m_ThirdBarWidth = 0;
+		}
+		m_ticks = 0;
+	}
+
 	
 }
 
@@ -103,8 +121,21 @@ void GrowingBars::MouseButtonAction(bool isLeft, bool isDown, int x, int y, WPAR
 				GAME_ENGINE->MessageBox("Clicked.");
 			}
 		}
+		
 	}
 	*/
+	if (isLeft == true && isDown == true)
+	{
+		if ((x > BAR_POSX		&& x < BAR_POSX + m_ThirdBarWidth) &&
+			(y > BAR_POSY + 400 && y < BAR_POSY + 400 + BAR_HEIGTH))
+		{
+			g_color = RGB(
+			rand() % 256,
+			rand() % 256, 
+			rand() % 256 
+			);
+		}
+	}
 }
 
 
@@ -139,6 +170,7 @@ void GrowingBars::CheckKeyboard()
 	if (GAME_ENGINE->IsKeyDown('M')) xIcon += xSpeed;
 	if (GAME_ENGINE->IsKeyDown('O')) yIcon -= ySpeed;
 	*/
+	if (GAME_ENGINE->IsKeyDown('R')) m_ThirdBarWidth = 0;
 }
 
 void GrowingBars::KeyPressed(TCHAR cKey)

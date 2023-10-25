@@ -1,31 +1,29 @@
 //-----------------------------------------------------------------
 // Main Game File
-// C++ Source - LissajousDemo.cpp - version v7_02_firstyear
+// C++ Source - Explosion.cpp - version v7_02_firstyear
 //-----------------------------------------------------------------
 
 //-----------------------------------------------------------------
 // Include Files
 //-----------------------------------------------------------------
-#include "LissajousDemo.h"
-#define _USE_MATH_DEFINES
-#include <math.h>
+#include "Explosion.h"
 
 //-----------------------------------------------------------------
-// LissajousDemo methods																				
+// Explosion methods																				
 //-----------------------------------------------------------------
 
-LissajousDemo::LissajousDemo() 																	
+Explosion::Explosion() 																	
 {
 	// nothing to create
 }
 
-LissajousDemo::~LissajousDemo()																						
+Explosion::~Explosion()																						
 {
 	// nothing to destroy
 }
 
 
-void LissajousDemo::Initialize(HINSTANCE hInstance)			
+void Explosion::Initialize(HINSTANCE hInstance)			
 {
 	// Set the required values
 	AbstractGame::Initialize(hInstance);
@@ -33,8 +31,8 @@ void LissajousDemo::Initialize(HINSTANCE hInstance)
 	GAME_ENGINE->RunGameLoop(true);		
 	
 	// Set the optional values
-	GAME_ENGINE->SetWidth(WINDOWWIDTH);
-	GAME_ENGINE->SetHeight(WINDOWHEIGTH);
+	GAME_ENGINE->SetWidth(SCREENWIDTH);
+	GAME_ENGINE->SetHeight(SCREENHEIGTH);
     GAME_ENGINE->SetFrameRate(FRAMERATE);
 
 	// Set the keys that the game needs to listen to
@@ -45,66 +43,63 @@ void LissajousDemo::Initialize(HINSTANCE hInstance)
 	//GAME_ENGINE->SetKeyList(buffer.str());
 }
 
-void LissajousDemo::Start()
+void Explosion::Start()
 {
 	// Insert the code that needs to be executed at the start of the game
-	//GAME_ENGINE->ShowMousePointer(false);
 }
 
-void LissajousDemo::End()
+void Explosion::End()
 {
 	// Insert the code that needs to be executed at the closing of the game
 }
 
-void LissajousDemo::Paint(RECT rect)
+void Explosion::Paint(RECT rect)
 {
-	GAME_ENGINE->SetColor(RGB(255,10,10,));
+	GAME_ENGINE->DrawSolidBackground(RGB(200,200,200));
+	GAME_ENGINE->SetColor(RGB(50,50,50));
+	GAME_ENGINE->FillRect(CENTER_POINT.x - (SQUARE_SIZE / 2), CENTER_POINT.y - (SQUARE_SIZE / 2), SQUARE_SIZE, SQUARE_SIZE);
 
-	double verticalDeviation{};
-	if (m_AnimationMode == AnimationMode::Both || m_AnimationMode == AnimationMode::Vertical)
-	{
-		double verticalWaveProgressInPercent{ -VERTICAL_PHASE_IN_PERCENT + m_TickCounter / (FRAMERATE * VERTICAL_PERIOD_IN_SECONDS) };
-		verticalDeviation = VERTICAL_AMPLITUDE * sin((2 * M_PI) * verticalWaveProgressInPercent);
-	}
-
-	double horizontalDeviation{};
-	if (m_AnimationMode == AnimationMode::Both || m_AnimationMode == AnimationMode::Horizontal)
-	{
-		double horizontalWaveProgressInPercent{ -HORIZONTAL_PHASE_IN_PERCENT + m_TickCounter / (FRAMERATE * HORIZONTAL_PERIOD_IN_SECONDS) };
-		horizontalDeviation = HORIZONTAL_AMPLITUDE * sin((2 * M_PI) * horizontalWaveProgressInPercent);
-	}
-	
-	GAME_ENGINE->FillOval((int)(m_CenterX  - RADIUS - horizontalDeviation), (int)(m_CenterY - RADIUS + verticalDeviation), 2 * RADIUS, 2 * RADIUS);
 
 }
 
-void LissajousDemo::Tick()
+void Explosion::Tick()
 {
-	++m_TickCounter;
 	// Insert non-paint code that needs to be executed each tick 
 }
 
-void LissajousDemo::MouseButtonAction(bool isLeft, bool isDown, int x, int y, WPARAM wParam)
-{
-	if (isLeft == false && isDown == false)
-	{
-		switch (m_AnimationMode)
+void Explosion::MouseButtonAction(bool isLeft, bool isDown, int x, int y, WPARAM wParam)
+{	
+	// Insert the code that needs to be executed when the game registers a mouse button action
+
+	/* Example:
+	if (isLeft == true && isDown == true) // is it a left mouse click?
+	{	
+		if ( x > 261 && x < 261 + 117 ) // check if click lies within x coordinates of choice
 		{
-		case AnimationMode::None: m_AnimationMode = AnimationMode::Vertical; break;
-		case AnimationMode::Vertical: m_AnimationMode = AnimationMode::Horizontal; break;
-		case AnimationMode::Horizontal: m_AnimationMode = AnimationMode::Both; break;
-		case AnimationMode::Both: m_AnimationMode = AnimationMode::None; break;
+			if ( y > 182 && y < 182 + 33 ) // check if click also lies within y coordinates of choice
+			{
+				GAME_ENGINE->MessageBox("Clicked.");
+			}
+		}
+	}
+	*/
+	if (isLeft == true && isDown == true)
+	{
+		if (x > CENTER_POINT.x - (SQUARE_SIZE / 2) && x < (CENTER_POINT.x - (SQUARE_SIZE / 2) + SQUARE_SIZE) &&
+			y > CENTER_POINT.y - (SQUARE_SIZE / 2) && y < (CENTER_POINT.y - (SQUARE_SIZE / 2) + SQUARE_SIZE))
+		{
+			//GAME_ENGINE->MessageBox("test");
 		}
 	}
 }
 
 
-void LissajousDemo::MouseWheelAction(int x, int y, int distance, WPARAM wParam)
+void Explosion::MouseWheelAction(int x, int y, int distance, WPARAM wParam)
 {	
 	// Insert the code that needs to be executed when the game registers a mouse wheel action
 }
 
-void LissajousDemo::MouseMove(int x, int y, WPARAM wParam)
+void Explosion::MouseMove(int x, int y, WPARAM wParam)
 {	
 	// Insert the code that needs to be executed when the mouse pointer moves across the game window
 
@@ -117,14 +112,9 @@ void LissajousDemo::MouseMove(int x, int y, WPARAM wParam)
 		}
 	}
 	*/
-
-	m_CenterX = x;
-	m_CenterY = y;
-
-
 }
 
-void LissajousDemo::CheckKeyboard()
+void Explosion::CheckKeyboard()
 {	
 	// Here you can check if a key of choice is held down
 	// Is executed once per frame if the Game Loop is running 
@@ -137,7 +127,7 @@ void LissajousDemo::CheckKeyboard()
 	*/
 }
 
-void LissajousDemo::KeyPressed(TCHAR cKey)
+void Explosion::KeyPressed(TCHAR cKey)
 {	
 	// DO NOT FORGET to use SetKeyList() !!
 
@@ -166,7 +156,7 @@ void LissajousDemo::KeyPressed(TCHAR cKey)
 	*/
 }
 
-void LissajousDemo::CallAction(Caller* callerPtr)
+void Explosion::CallAction(Caller* callerPtr)
 {
 	// Insert the code that needs to be executed when a Caller has to perform an action
 }
