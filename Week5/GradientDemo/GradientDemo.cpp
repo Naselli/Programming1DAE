@@ -55,13 +55,36 @@ void GradientDemo::End()
 
 void GradientDemo::Paint(RECT rect)
 {
-
+	
+	int XCoord {50}, YCoord{50}; 
 	int red { 255 }, green{ 0 }, blue{ 0 };
 
-	GAME_ENGINE->SetColor(RGB(red, green, blue));  
-	GAME_ENGINE->DrawLine(100,100,100,300);
+	/*
+	for (int counter{0} ; counter <= 255 ; counter++)
+	{
+		GAME_ENGINE->SetColor(RGB(red, green, blue));
+		GAME_ENGINE->DrawLine(XCoord, 150, XCoord, 250);
+		XCoord += 1;
+		red -= 1;
+		green += 1;
 
+	}
+	*/
 
+	for (int counter{ 0 }; counter <= 255; counter++)
+	{
+		for (int counterY{ 0 }; counterY <= 255; counterY++)
+		{
+			GAME_ENGINE->SetColor(RGB(red, green, blue));
+			GAME_ENGINE->DrawLine(XCoord + counter, YCoord + counterY , XCoord + counter, YCoord + counterY + 1);
+			red -= 1;
+
+		}
+
+		YCoord = 50;
+		green += 1;
+		blue += 1;
+	}
 }
 
 void GradientDemo::Tick()

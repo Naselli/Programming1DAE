@@ -634,7 +634,7 @@ void GameEngine::FormPolygon(const POINT ptsArr[], int count, bool close) const
 	else
 	{
 		POINT* newPtsArr= new POINT[count+1]; // interesting case: this code does not work with memory allocation at compile time => demo case for dynamic memory use
-		for (int i = 0; i < count; i++) newPtsArr[i] = ptsArr[i];
+		for (int counter = 0; counter < count; counter++) newPtsArr[counter] = ptsArr[counter];
 		newPtsArr[count] = ptsArr[0];
 
 		Polyline(m_HdcDraw, newPtsArr, count+1);

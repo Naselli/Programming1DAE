@@ -33,7 +33,7 @@ void RandomRectangle::Initialize(HINSTANCE hInstance)
 	// Set the optional values
 	GAME_ENGINE->SetWidth(1000);
 	GAME_ENGINE->SetHeight(1000);
-    GAME_ENGINE->SetFrameRate(1);
+    GAME_ENGINE->SetFrameRate(.5);
 
 	// Set the keys that the game needs to listen to
 	//std::stringstream buffer;
@@ -68,13 +68,21 @@ void RandomRectangle::Paint(RECT rect)
 
 		GAME_ENGINE->SetColor(color);
 
-		GAME_ENGINE->FillRect(
-		rand() % 1000,
-		rand() % 1000,
-		rand() % 300,
-		rand() % 300
-		);
+		int xOrigin{}, yOrigin{}, xSize{}, ySize{};
 
+		xOrigin = rand() % 800 + 40;
+		yOrigin = rand() % 800 + 40;
+		xSize = rand() % 300;
+		ySize = rand() % 300;
+
+		if ((xOrigin + xSize) > 1000)
+			xSize = 800 - xOrigin;
+		
+		if ((yOrigin + ySize) > 1000)
+			ySize = 800 - yOrigin;
+
+		GAME_ENGINE->FillRect(xOrigin,yOrigin,xSize,ySize);
+		GAME_ENGINE->DrawRect(xOrigin,yOrigin,xSize,ySize);
 	}
 }
 
