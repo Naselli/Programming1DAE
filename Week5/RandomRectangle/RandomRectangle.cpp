@@ -56,32 +56,33 @@ void RandomRectangle::End()
 void RandomRectangle::Paint(RECT rect)
 {
 	GAME_ENGINE->DrawSolidBackground(RGB(255,255,255));
-	const int MAX_AMOUNT { 50 };
+	GAME_ENGINE->DrawSolidBackground(RGB(0,0,0));
+	const int MAX_AMOUNT { 100 };
 
 	for ( int counter {0} ; counter < MAX_AMOUNT ; ++counter)
 	{
 		COLORREF color = RGB(
-		rand() % 256,
-		rand() % 256,
-		rand() % 256
+		rand() % 255,
+		rand() % 255,
+		rand() % 255
 		);
 
 		GAME_ENGINE->SetColor(color);
 
 		int xOrigin{}, yOrigin{}, xSize{}, ySize{};
 
-		xOrigin = rand() % 800 + 40;
-		yOrigin = rand() % 800 + 40;
-		xSize = rand() % 300;
-		ySize = rand() % 300;
+		xOrigin = rand() % 900 + 40;
+		yOrigin = rand() % 900 + 40;
+		xSize = rand() % 100;
+		ySize = rand() % 100;
 
-		if ((xOrigin + xSize) > 1000)
-			xSize = 800 - xOrigin;
+		if ((xOrigin + xSize) > 900)
+			xSize = 900 - xOrigin;
 		
-		if ((yOrigin + ySize) > 1000)
-			ySize = 800 - yOrigin;
+		if ((yOrigin + ySize) > 900)
+			ySize = 900 - yOrigin;
 
-		GAME_ENGINE->FillRect(xOrigin,yOrigin,xSize,ySize);
+		//GAME_ENGINE->FillRect(xOrigin,yOrigin,xSize,ySize);
 		GAME_ENGINE->DrawRect(xOrigin,yOrigin,xSize,ySize);
 	}
 }
