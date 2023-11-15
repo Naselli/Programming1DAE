@@ -71,9 +71,11 @@ void DrawFunctions::Paint(RECT rect)
 	DrawTriangles({300,200}, 200, RGB(255,0,0), 3);
 	
 	for ( int i{20} ; i < 360 ; i += 30)
-	{
 		DrawPentagram( 20 + i ,150,10,i );
-	}
+	
+
+	GAME_ENGINE->SetColor( RGB(255,0,0) );
+	DrawDotGrid( 20,20, 50, 5 , 3 ,5 );
 }
 
 void DrawFunctions::End()
@@ -122,6 +124,23 @@ void DrawFunctions::DrawGradient(int x, int y, int width, int height, COLORREF f
 		currentRed += incrementRed;
 		currentGreen += incrementGreen;
 		currentBlue += incrementBlue;
+	}
+}
+
+
+void DrawFunctions::DrawDotGrid(int x, int y, int diameter, int spacing, int rows, int columns)
+{
+	for(int countRows{}; countRows < rows; ++countRows)
+	{
+		for ( int countColumns{}; countColumns < columns; ++countColumns)
+		{
+			GAME_ENGINE->FillOval(
+				x + countColumns * (diameter + spacing),
+				y + countRows * (diameter + spacing),
+				diameter,
+				diameter
+				);
+		}
 	}
 }
 
@@ -216,12 +235,6 @@ void DrawFunctions::DrawPentagram(int centerX, int centerY, int radius, int star
 		GAME_ENGINE->DrawLine( x1, y1, x2, y2 );
 	}
 }
-
-
-
-
-
-
 
 void DrawFunctions::Tick()
 {

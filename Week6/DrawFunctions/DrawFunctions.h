@@ -59,6 +59,7 @@ public:
 	void DrawCircles( POINT postition, int rows, int columns, int size, int amount, int spacing);
 	void DrawTriangles ( POINT position, int height, COLORREF colour, int amount );
 	void DrawGradient(int x, int y, int width, int height, COLORREF firstColor, COLORREF secondColor);
+	void DrawDotGrid ( int x, int y, int diameter, int spacing, int rows, int columns );
 	void FillTriangle ( POINT p1, POINT p2, POINT p3 );
 	void FillTriangle ( POINT p1, POINT p2, POINT p3, COLORREF colour );
 	void DrawPentagram ( int centerX, int centerY, int radius, int startAngle );
