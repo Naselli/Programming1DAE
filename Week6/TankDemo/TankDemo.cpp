@@ -126,67 +126,67 @@ void TankDemo::MouseMove(int x, int y, WPARAM wParam)
 }
 void TankDemo::CheckKeyboard()
 {
-	// check the keys 
-	const bool isUp { GAME_ENGINE-> IsKeyDown( VK_UP )};
-	const bool isDown { GAME_ENGINE-> IsKeyDown( VK_DOWN )};
-	const bool isLeft { GAME_ENGINE-> IsKeyDown( VK_LEFT )};
-	const bool isRight { GAME_ENGINE-> IsKeyDown( VK_RIGHT )};
+		// check the keys 
+		const bool isUp { GAME_ENGINE-> IsKeyDown( VK_UP )};
+		const bool isDown { GAME_ENGINE-> IsKeyDown( VK_DOWN )};
+		const bool isLeft { GAME_ENGINE-> IsKeyDown( VK_LEFT )};
+		const bool isRight { GAME_ENGINE-> IsKeyDown( VK_RIGHT )};
 
-	// update direction
-	if ( isUp )
-	{
-		if ( isLeft )		m_TankData.direction = Direction::UpLeft;
-		else if ( isRight ) m_TankData.direction = Direction::UpRight;
-		else				m_TankData.direction = Direction::Up;
-	}
+		// update direction
+		if ( isUp )
+		{
+			if ( isLeft )		m_TankData.direction = Direction::UpLeft;
+			else if ( isRight ) m_TankData.direction = Direction::UpRight;
+			else				m_TankData.direction = Direction::Up;
+		}
 
-	else if (isDown)
-	{
-		if ( isLeft )		m_TankData.direction = Direction::DownLeft;
-		else if ( isRight ) m_TankData.direction = Direction::DownRight;
-		else				m_TankData.direction = Direction::Down;
-	}
-	else if (isLeft) m_TankData.direction = Direction::Left;
-	else if (isRight) m_TankData.direction = Direction::Right;
+		else if (isDown)
+		{
+			if ( isLeft )		m_TankData.direction = Direction::DownLeft;
+			else if ( isRight ) m_TankData.direction = Direction::DownRight;
+			else				m_TankData.direction = Direction::Down;
+		}
+		else if (isLeft) m_TankData.direction = Direction::Left;
+		else if (isRight) m_TankData.direction = Direction::Right;
 
-	if ( isUp ) m_TankData.position.y -= m_TankData.SPEED;
-	if ( isDown ) m_TankData.position.y += m_TankData.SPEED;
-	if ( isLeft ) m_TankData.position.x -= m_TankData.SPEED;
-	if ( isRight ) m_TankData.position.x += m_TankData.SPEED;
-	
-	/*
-	//update position
-	switch ( m_TankData.direction ) {
-		case Direction::Up:
-			m_TankData.position.y -= m_TankData.SPEED;
-		break;
-		case Direction::UpRight:
-			m_TankData.position.y -= m_TankData.SPEED / 2;
-			m_TankData.position.x += m_TankData.SPEED / 2;
-		break;
-		case Direction::Right:
-			m_TankData.position.x += m_TankData.SPEED;
+		if ( isUp ) m_TankData.position.y -= m_TankData.SPEED;
+		if ( isDown ) m_TankData.position.y += m_TankData.SPEED;
+		if ( isLeft ) m_TankData.position.x -= m_TankData.SPEED;
+		if ( isRight ) m_TankData.position.x += m_TankData.SPEED;
+		
+		/*
+		//update position
+		switch ( m_TankData.direction ) {
+			case Direction::Up:
+				m_TankData.position.y -= m_TankData.SPEED;
 			break;
-		case Direction::DownRight:
-			m_TankData.position.y += m_TankData.SPEED / 2;
-			m_TankData.position.x += m_TankData.SPEED / 2;
+			case Direction::UpRight:
+				m_TankData.position.y -= m_TankData.SPEED / 2;
+				m_TankData.position.x += m_TankData.SPEED / 2;
 			break;
-		case Direction::Down:
-			m_TankData.position.y += m_TankData.SPEED;
+			case Direction::Right:
+				m_TankData.position.x += m_TankData.SPEED;
+				break;
+			case Direction::DownRight:
+				m_TankData.position.y += m_TankData.SPEED / 2;
+				m_TankData.position.x += m_TankData.SPEED / 2;
+				break;
+			case Direction::Down:
+				m_TankData.position.y += m_TankData.SPEED;
+				break;
+			case Direction::DownLeft:
+				m_TankData.position.x -= m_TankData.SPEED / 2;
+				m_TankData.position.y += m_TankData.SPEED / 2 ;
 			break;
-		case Direction::DownLeft:
-			m_TankData.position.x -= m_TankData.SPEED / 2;
-			m_TankData.position.y += m_TankData.SPEED / 2 ;
-		break;
-		case Direction::Left:
-			m_TankData.position.x -= m_TankData.SPEED;
-			break;
-		case Direction::UpLeft:
-			m_TankData.position.x -= m_TankData.SPEED / 2;
-			m_TankData.position.y -= m_TankData.SPEED / 2;
-			break;
-		default: ;
-	}*/
+			case Direction::Left:
+				m_TankData.position.x -= m_TankData.SPEED;
+				break;
+			case Direction::UpLeft:
+				m_TankData.position.x -= m_TankData.SPEED / 2;
+				m_TankData.position.y -= m_TankData.SPEED / 2;
+				break;
+			default: ;
+		}*/
 	
 }
 void TankDemo::KeyPressed(TCHAR cKey)
