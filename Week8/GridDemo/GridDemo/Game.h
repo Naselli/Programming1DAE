@@ -38,6 +38,8 @@ CellState g_GridArr[ROWS][COLUMNS]{};
 
 // Declare your own functions here
 void DrawGrid();
+int GetRowIndex(const Point2f& clickPos);
+int GetColumnIndex(const Point2f& clickPos);
 
 
 #pragma endregion ownDeclarations
