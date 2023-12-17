@@ -4,16 +4,43 @@
 
 //Basic game functions
 #pragma region gameFunctions											
+
 void Start()
 {
-	
+	g_FractionPtrArr[0] = new Fraction{3,5};
+	g_FractionPtrArr[1] = new Fraction{2,5};
+	g_FractionPtrArr[2] = new Fraction{2,3};
+	g_FractionPtrArr[3] = new Fraction{2,4};
+	g_FractionPtrArr[4] = new Fraction{1,4};
+	g_FractionPtrArr[5] = new Fraction{1,3};
+
+	PrintFractionSum();
+
+	g_LightPtr = new Light{ Rectf{300, 200, 100, 100},  Color4f{1,0,0, 1}};
 }
+void PrintFractionSum ( )
+{
+	float sum{};
+	for ( int fractionIndex{}; fractionIndex < NR_OF_FRACTIONS; ++fractionIndex )
+	{
+		sum += g_FractionPtrArr[fractionIndex]->GetValue(  );
+	}
+
+	std::cout << sum << std::endl;
+};
 
 void Draw()
 {
 	ClearBackground();
-
+	SetColor(1, 0 ,0 );
+	for ( int i = 0; i < NR_OF_FRACTIONS; ++i  )
+	{
+		g_FractionPtrArr[i]->Draw( Point2f{50,50 + ((float)i * 50)}, 50 );
+		
+	}
 	// Put your own draw statements here
+
+	g_LightPtr->Draw(  );
 
 }
 
@@ -35,7 +62,12 @@ void Update(float elapsedSec)
 
 void End()
 {
-	// free game resources here
+	for ( int fractionsIndex{}; fractionsIndex < NR_OF_FRACTIONS; ++fractionsIndex)
+	{
+		delete g_FractionPtrArr[fractionsIndex];
+	}
+
+	delete g_LightPtr;
 }
 #pragma endregion gameFunctions
 
@@ -73,6 +105,7 @@ void OnMouseMotionEvent(const SDL_MouseMotionEvent& e)
 
 void OnMouseDownEvent(const SDL_MouseButtonEvent& e)
 {
+	g_LightPtr->OnMouseDownEvent( e );
 	// SAMPLE CODE: print mouse position
 	//const float mouseX{ float(e.x) };
 	//const float mouseY{ float(e.y) };

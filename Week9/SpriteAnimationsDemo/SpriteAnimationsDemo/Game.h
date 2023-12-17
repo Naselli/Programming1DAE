@@ -4,7 +4,7 @@ using namespace utils;
 
 #pragma region gameInformation
 // TODO: Set your name and group in the title here
-std::string g_WindowTitle{ "TRON - Naselli, Luca - 1DAE14" };
+std::string g_WindowTitle{ "Sprite Animations Demo - Hoefman, Kevin - DAE" };
 
 // Change the window dimensions here
 float g_WindowWidth{ 800 };
@@ -14,12 +14,31 @@ float g_WindowHeight{ 600 };
 
 
 #pragma region ownDeclarations
-//  Const and structs
-static const int WINDOW_WIDTH{800};
-static const int WINDOW_HEIGHT{600};
+// Structs and Enum Classes
+struct Sprite
+{
+	void Start(	const std::string& texturePath, 
+				float x, float y, 
+				int rows, int columns, float frameDelay);
+	void Draw();
+	void Update(float elapsedSec);
+	void End();
 
+	Texture		m_Texture;
+	Point2f		m_Location;
+	int			m_Rows, m_Columns;
+	int			m_FrameWidth, m_FrameHeight;
+	float		m_FrameDelay;
+	float		m_AccumulatedTime;
+	int			m_CurrentFrame;
+};
+
+// Constants
 
 // Declare your own global variables here
+Texture g_TextureString{};
+
+Sprite g_GirlSprite{}, g_CrabSprite{};
 
 // Declare your own functions here
 

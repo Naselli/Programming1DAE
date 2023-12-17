@@ -2,9 +2,12 @@
 #include <utils.h>
 using namespace utils;
 
+#include "Sprite.h"
+#include "StringSprite.h"
+
 #pragma region gameInformation
 // TODO: Set your name and group in the title here
-std::string g_WindowTitle{ "TRON - Naselli, Luca - 1DAE14" };
+std::string g_WindowTitle{ "Sprite Animations Demo - Naselli, Luca - 1DAE14" };
 
 // Change the window dimensions here
 float g_WindowWidth{ 800 };
@@ -14,12 +17,14 @@ float g_WindowHeight{ 600 };
 
 
 #pragma region ownDeclarations
-//  Const and structs
-static const int WINDOW_WIDTH{800};
-static const int WINDOW_HEIGHT{600};
+// Structs and Enum Classes
 
+// Constants
 
 // Declare your own global variables here
+StringSprite*  g_TxtTitlePtr{};
+
+Sprite *g_GirlSpritePtr, *g_CrabSpritePtr;
 
 // Declare your own functions here
 

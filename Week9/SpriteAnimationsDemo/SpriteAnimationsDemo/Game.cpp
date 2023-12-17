@@ -6,36 +6,88 @@
 #pragma region gameFunctions											
 void Start()
 {
+	// load texture from string
+	TextureFromString(	"Sprite Animations", "Resources/Fonts/DIN-Light.otf", 
+						60, Color4f{ 0.0f, 0.0f, 0.0f}, g_TextureString);
 	
+	g_CrabSprite.Start( "Resources/Images/crab spritesheet.png",
+						g_WindowWidth / 4, g_WindowHeight / 2, 4, 6, 0.050f);
+
+	g_GirlSprite.Start("Resources/Images/walkingcycle girl.png",
+						g_WindowWidth * 3 / 4, g_WindowHeight / 2, 1, 6, 0.050f);
+}
+
+void Sprite::Start(const std::string& texturePath,
+				float x, float y, int rows, int columns, float frameDelay)
+{
+	// initialize crab data
+	TextureFromFile(texturePath, m_Texture);
+	m_Location.x = x;
+	m_Location.y = y;
+	m_Rows = rows;
+	m_Columns = columns;
+	m_FrameWidth = m_Texture.width / m_Columns;
+	m_FrameHeight = m_Texture.height / m_Rows;
+	m_FrameDelay = frameDelay;
 }
 
 void Draw()
 {
 	ClearBackground();
 
-	// Put your own draw statements here
+	// Draw String texture
+	DrawTexture(g_TextureString, Point2f{ 20, 20 });
 
+	// Draw my sprites
+	g_CrabSprite.Draw();
+	g_GirlSprite.Draw();
+}
+
+void Sprite::Draw()
+{
+	const int rowIndex{ m_CurrentFrame / m_Columns };
+	const int colIndex{ m_CurrentFrame % m_Columns };
+
+	const Rectf sourceRect{ colIndex * m_FrameWidth,
+							rowIndex * m_FrameHeight,
+							m_FrameWidth,
+							m_FrameHeight };
+
+	DrawTexture(m_Texture, m_Location, sourceRect);
 }
 
 void Update(float elapsedSec)
 {
-	// process input, do physics 
+	g_CrabSprite.Update(elapsedSec);
+	g_GirlSprite.Update(elapsedSec);
+}
 
-	// e.g. Check keyboard state
-	//const Uint8 *pStates = SDL_GetKeyboardState( nullptr );
-	//if ( pStates[SDL_SCANCODE_RIGHT] )
-	//{
-	//	std::cout << "Right arrow key is down\n";
-	//}
-	//if ( pStates[SDL_SCANCODE_LEFT] && pStates[SDL_SCANCODE_UP])
-	//{
-	//	std::cout << "Left and up arrow keys are down\n";
-	//}
+void Sprite::Update(float elapsedSec)
+{
+	m_AccumulatedTime += elapsedSec;
+
+	if (m_AccumulatedTime > m_FrameDelay)
+	{
+		++m_CurrentFrame;
+		if (m_CurrentFrame >= m_Rows * m_Columns)
+		{
+			m_CurrentFrame = 0;
+		}
+		m_AccumulatedTime -= m_FrameDelay;
+	}
 }
 
 void End()
 {
-	// free game resources here
+	DeleteTexture(g_TextureString);
+
+	g_CrabSprite.End();
+	g_GirlSprite.End();
+}
+
+void Sprite::End()
+{
+	DeleteTexture(m_Texture);
 }
 #pragma endregion gameFunctions
 

@@ -6,37 +6,51 @@
 #pragma region gameFunctions											
 void Start()
 {
+	// create title sprite
+	g_TxtTitlePtr = new StringSprite(	"Sprite Animations", "Resources/Fonts/DIN-Light.otf", 
+						60, Color4f{ 0.0f, 0.0f, 0.0f}, Point2f{ 20, 20});
+
+	// g_TxtTitlePtr-> ReCreate("Sprite Animations Recreated", "Resources/Fonts/DIN-Light.otf", 
+	// 					60, Color4f{ 0.0f, 0.0f, 0.0f});
 	
+	g_CrabSpritePtr = new Sprite( "Resources/Images/crab spritesheet.png",
+						g_WindowWidth / 4, g_WindowHeight / 2, 4, 6, 0.050f);
+
+	g_GirlSpritePtr = new Sprite("Resources/Images/walkingcycle girl.png",
+						g_WindowWidth * 3 / 4, g_WindowHeight / 2, 1, 6, 0.050f);
 }
+
 
 void Draw()
 {
 	ClearBackground();
 
-	// Put your own draw statements here
+	// Draw String texture
+	g_TxtTitlePtr->Draw(  );
 
+	// Draw my sprites
+	g_CrabSpritePtr->Draw();
+	g_GirlSpritePtr->Draw();
 }
+
 
 void Update(float elapsedSec)
 {
-	// process input, do physics 
-
-	// e.g. Check keyboard state
-	//const Uint8 *pStates = SDL_GetKeyboardState( nullptr );
-	//if ( pStates[SDL_SCANCODE_RIGHT] )
-	//{
-	//	std::cout << "Right arrow key is down\n";
-	//}
-	//if ( pStates[SDL_SCANCODE_LEFT] && pStates[SDL_SCANCODE_UP])
-	//{
-	//	std::cout << "Left and up arrow keys are down\n";
-	//}
+	g_CrabSpritePtr->Update(elapsedSec);
+	g_GirlSpritePtr->Update(elapsedSec);
 }
+
+
 
 void End()
 {
-	// free game resources here
+	delete g_TxtTitlePtr;
+
+	delete g_CrabSpritePtr;
+	delete g_GirlSpritePtr;
 }
+
+
 #pragma endregion gameFunctions
 
 //Keyboard and mouse input handling
